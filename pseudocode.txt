@@ -1,0 +1,78 @@
+// Variables to be declared
+DAYS = 7
+
+int startHours[DAYS];
+int startMinutes[DAYS];
+int endHours[DAYS];
+int endMinutes[DAYS];
+int hours[DAYS];
+int minutes[DAYS];
+float wages[DAYS];
+
+
+int totalHours;
+int totalMinutes;
+float totalWages;
+
+int daysWorked;
+float payPerHour;
+
+int i;
+
+
+// Gathers info
+daysWorked = input (how many days worked?)
+payPerHour = input (how much per hour)
+
+
+// finds start and end time
+for i in range(DAYS)
+    startHours[i]    = input (enter start hours)
+    startMinutes[i]  = input (enter start minutes)
+    endHours[i]      = input (enter end hours)
+    endminutes[i]    = input (enter end minutes)
+
+
+// calculates hours and minutes (3 conditions)
+for i in range(daysWorked)
+    // condition 1 (startMinutes[i] < endMinutes[i])
+    if endMinutes[i] > startMinutes[i]
+        hours[i]   = endHours[i] - startHours[i]
+        minutes[i] = endMinutes[i] - startMinutes[i]
+
+    // condition 2 (startMinutes > endMinutes)
+    else if startMinutes[i] > endMinutes[i]
+        hours[i] = endHours[i] - startHours[i] + 1
+        minutes[i] = (60-startMinutes) + endMinutes[i]
+
+    // condition 3 (startMinutes[i] == endMinutes[i])
+    else   
+        hours = endHours[i] - startHours[i]
+
+
+// calculates wages 
+// (hours+(minutes/60)) * payPerHour
+for i in range(daysWorked)
+    wages[i] = (hours[i] + (minutes[i]/60)) * 60
+
+
+// shows results
+/*
+----------------------------------------------------------
+Day  Start   End     Hours   TotalHr   Wages   TotalWages
+1    16:56   22:50   7h30m   7h30m    80.26   80.26
+2    16:56   22:50   7h30m   14h30m    80.26   160.26
+3    16:56   22:50   7h30m   21h30m    80.26   200.26
+4    16:56   22:50   7h30m   28h30m    80.26   260.26
+5    16:56   22:50   7h30m   35h30m    80.26   320.26
+6    16:56   22:50   7h30m   40h30m    80.26   360.26
+----------------------------------------------------------
+*/
+
+print("----------------------------------------------------------")
+print("Day  Start   End     Hours   TotalHr   Wages   TotalWages")
+for i in range(days)
+    totalHours += hours[i]
+    totalWages += wages[i]
+
+    print(i+1  startHours,":",startMinutes[i]  endHours[i],":",endMinutes[i]  hours[i],"h",minutes[i],"m"  totalHours  wages[i]  totalWages)

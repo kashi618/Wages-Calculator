@@ -28,6 +28,7 @@ int main() {
     printf("\nPay per hour: ");
         scanf("%f",&payPerHour);
 
+
     // Gathers the time user went and left work each day
     for (i=0; i<daysWorked; i++) {;
         printf("Start hrs  for Day %d: ",i+1);
@@ -40,6 +41,7 @@ int main() {
             scanf("%d",&endMinutes[i]);   
         printf("\n"); 
     }
+
 
     // Calculates the amount of hours and minutes worked
     for (i=0; i<daysWorked; i++) {
@@ -63,10 +65,9 @@ int main() {
     // Calculates wages
     // wage = (hours+(minutes/60)) * payPerHour
     for (i=0; i<daysWorked; i++) {
-        wages[i] = (hours[i] + (minutes[i]/60)) * payPerHour;
+        wages[i] = ((float)hours[i] + ((float)minutes[i]/60)) * payPerHour;
     }
     
-
     
     // Displays table of results
     printf("\n----------------------------------------------------------");
@@ -76,14 +77,20 @@ int main() {
         totalHours   += hours[i];
         totalMinutes += minutes[i];
         totalWages   += wages[i];
-        
+
+        // If total minutes over 60, it rolls over to hour
+        if (totalMinutes > 60) {
+            totalMinutes -= 60;
+            totalHours += 1;
+
+        }
         printf("%d    ",i+1);
         printf("%02d:%02d   ",startHours[i],startMinutes[i]);
         printf("%02d:%02d   ",endHours[i],endMinutes[i]);
-        printf("%02dh%02dm    ",hours[i],minutes[i]);
+        printf("%02dh%02dm   ",hours[i],minutes[i]);
         printf("%02dh%02dm    ",totalHours,totalMinutes);
-        printf("%03.4f   ",wages[i]);
-        printf("%03.4f",totalWages);
+        printf("%.4f    ",wages[i]);
+        printf("%.4f",totalWages);
         printf("\n");
     }
 
